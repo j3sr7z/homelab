@@ -5,7 +5,7 @@ volumes:
     driver: local
 services:
   prometheus:
-    image: prom/prometheus:v2.53.0
+    image: prom/prometheus:v2.53.4
     container_name: prometheus
     ports:
       - ${CONTAINER_PORT}:9090
@@ -16,7 +16,7 @@ services:
     command:
       "--config.file=/etc/prometheus/prometheus.yaml"
   grafana:
-    image: grafana/grafana-oss:11.0.0
+    image: grafana/grafana-oss:11.6.0
     container_name: grafana
     ports:
       - ${CONTAINER_PORT_GRA}:3000
@@ -24,7 +24,7 @@ services:
       - grafana-data:/var/lib/grafana
     restart: unless-stopped
   node_exporter:
-    image: quay.io/prometheus/node-exporter:v1.8.1
+    image: quay.io/prometheus/node-exporter:v1.9.1
     container_name: node_exporter
     command: "--path.rootfs=/host"
     pid: host
