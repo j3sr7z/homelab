@@ -1,6 +1,6 @@
 services:
   vikunja:
-    image: vikunja/vikunja:0.24.0
+    image: vikunja/vikunja:0.24.6
     container_name: vikunja
     environment:
       VIKUNJA_SERVICE_JWTSECRET: ${VIKUNJA_SERVICE_JWTSECRET}
