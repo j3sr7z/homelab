@@ -3,7 +3,7 @@ networks:
     external: false
 services:
   gitea:
-    image: 'gitea/gitea:v1.23.5'
+    image: gitea/gitea:1.23.7
     container_name: gitea
     environment:
       - USER_UID=${USER_UID}
