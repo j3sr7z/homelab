@@ -1,0 +1,35 @@
+services:
+  wallabag:
+    image: wallabag/wallabag:2.6.10
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - SYMFONY__ENV__DATABASE_DRIVER=${SYMFONY__ENV__DATABASE_DRIVER}
+      - SYMFONY__ENV__DATABASE_HOST=${SYMFONY__ENV__DATABASE_HOST}
+      - SYMFONY__ENV__DATABASE_PORT=${SYMFONY__ENV__DATABASE_PORT}
+      - SYMFONY__ENV__DATABASE_NAME=${SYMFONY__ENV__DATABASE_NAME}
+      - SYMFONY__ENV__DATABASE_USER=${SYMFONY__ENV__DATABASE_USER}
+      - SYMFONY__ENV__DATABASE_PASSWORD=${SYMFONY__ENV__DATABASE_PASSWORD}
+      - SYMFONY__ENV__DATABASE_CHARSET=${SYMFONY__ENV__DATABASE_CHARSET}
+      - SYMFONY__ENV__DATABASE_TABLE_PREFIX=${SYMFONY__ENV__DATABASE_TABLE_PREFIX}
+      - SYMFONY__ENV__MAILER_DSN=${SYMFONY__ENV__MAILER_DSN}
+      - SYMFONY__ENV__FROM_EMAIL=${SYMFONY__ENV__FROM_EMAIL}
+      - SYMFONY__ENV__DOMAIN_NAME=${SYMFONY__ENV__DOMAIN_NAME}
+      - SYMFONY__ENV__SERVER_NAME=${SYMFONY__ENV__SERVER_NAME}
+    ports:
+      - ${CONTAINER_PORT}:80
+    volumes:
+      - /opt/wallabag/images:/var/www/wallabag/web/assets/images
+    depends_on:
+      - db
+      - redis
+  db:
+    image: mariadb
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - /opt/wallabag/data:/var/lib/mysql
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
