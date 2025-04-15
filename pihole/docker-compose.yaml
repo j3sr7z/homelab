@@ -1,7 +1,7 @@
 services:
   cloudflared:
     container_name: cloudflared
-    image: cloudflare/cloudflared:2025.2.1
+    image: cloudflare/cloudflared:2025.4.0
     restart: unless-stopped
     command: proxy-dns
     environment:
@@ -15,7 +15,7 @@ services:
   pihole:
     container_name: pihole
     hostname: pi-hole-docker
-    image: pihole/pihole:2025.03.1
+    image: pihole/pihole:2025.04.0
     ports:
       - 53:53/tcp
       - 53:53/udp
